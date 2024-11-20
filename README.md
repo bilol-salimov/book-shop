@@ -1,1 +1,1 @@
-# (BOOK SHOP){https://bilol-salimov-bookshop.netlify.app/}
+# (BOOK SHOP)[https://bilol-salimov-bookshop.netlify.app/]
