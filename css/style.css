@@ -349,3 +349,23 @@ main .container {
 .total-price {
   font-size: 3.2rem;
 }
+
+/* Footer */
+footer {
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer img {
+  width: 120px;
+}
+
+.copyright {
+  color: #ffb800;
+}
