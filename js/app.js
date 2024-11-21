@@ -5,6 +5,7 @@ const totalPrice = document.querySelector(".total-price .price");
 let slideIndex = 0;
 let numbers = [];
 let total = 0;
+let scrollPosition = 0;
 let fetchData;
 
 function fetchApi(path, getData) {
@@ -25,31 +26,32 @@ function getData(data) {
     const book = document.createElement("div");
     book.classList.add("book");
     book.innerHTML = `
-      <div class="book-img">
-                  <img src="${bookData.imageLink}" alt="book image" />
-                </div>
-                <div class="book-info">
-                  <h4 class="book-title">${bookData.title}</h4>
-                  <p class="book-author">${bookData.author}</p>
-                  <div class="book-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <div class="book-price"><p>Price:</p> <h3>$${bookData.price}</h3></div>
-                  <div class="book-buttons">
-                    <button class="btn add-to-bag">Add to bag</button>
-                    <button class="outline show-more">Show more</button>
-                  </div>
-                </div>
+    <div class="book-img">
+    <img src="${bookData.imageLink}" alt="book image" />
+    </div>
+    <div class="book-info">
+    <h4 class="book-title">${bookData.title}</h4>
+    <p class="book-author">${bookData.author}</p>
+    <div class="book-rating">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    </div>
+    <div class="book-price"><p>Price:</p> <h3>$${bookData.price}</h3></div>
+    <div class="book-buttons">
+    <button class="btn add-to-bag">Add to bag</button>
+    <button class="outline show-more">Show more</button>
+    </div>
+    </div>
     `;
     books.appendChild(book);
   });
 
   // Call addBook after all books are rendered
   addBook();
+  showMore(data);
 }
 
 function addBook() {
@@ -79,7 +81,7 @@ function addBook() {
       const newBook = document.createElement("div");
       newBook.classList.add("book");
       newBook.innerHTML = `       
-      <button class="cancel-order"><i class="fas fa-close"></i></button>
+      <button class="close-btn"><i class="fas fa-close"></i></button>
       <div class="book-img">
       <img src="${imgSrc}" alt="book image" />
       </div>
@@ -113,7 +115,7 @@ function cancelBook(newBook, price) {
   let booksInBag = bagBooks.querySelectorAll(".book");
   const index = Array.from(booksInBag).indexOf(newBook);
   // console.log(index);
-  const cancelOrder = newBook.querySelector(".cancel-order");
+  const cancelOrder = newBook.querySelector(".close-btn");
   cancelOrder.addEventListener("click", () => {
     const orderNumber = newBook.querySelector(".order-number").innerText;
     // console.log(orderNumber);
@@ -222,5 +224,53 @@ function orderNumber() {
         minusBtn.style.backgroundColor = "#dddddd";
       }
     };
+  });
+}
+
+// show more button
+function showMore(data) {
+  const modal = document.querySelector(".modal");
+  const modalContent = modal.querySelector(".modal-content");
+  const books = document.querySelectorAll(".books .book");
+  books.forEach((book, index) => {
+    const showMoreBtn = book.querySelector(".show-more");
+    showMoreBtn.addEventListener("click", () => {
+      const bookTitle = book.querySelector(".book-title").innerText;
+      const bookDescription = data[index].description;
+
+      modal.style.display = "flex";
+      setTimeout(() => {
+        modalContent.classList.add("active");
+      });
+      const modalTitle = modal.querySelector(".book-title");
+      const modalDescription = modal.querySelector(".book-description");
+
+      modalTitle.innerText = bookTitle;
+      modalDescription.innerText = bookDescription;
+
+      // freeze scrollY
+      scrollPosition = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollPosition}px`;
+    });
+  });
+
+  // close modal
+  closeModal(modal);
+}
+
+// close modal
+function closeModal(modal) {
+  const modalContent = modal.querySelector(".modal-content");
+  const closeModal = modal.querySelector(".close-btn");
+  closeModal.addEventListener("click", () => {
+    modalContent.classList.remove("active");
+    setTimeout(() => {
+      modal.style.display = "none";
+
+      document.body.style.position = "";
+      document.body.style.top = "";
+      window.scrollTo(0, scrollPosition);
+    }, 200);
   });
 }
