@@ -6,6 +6,7 @@ let slideIndex = 0;
 let numbers = [];
 let total = 0;
 let scrollPosition = 0;
+let inputValue = "";
 let fetchData;
 
 function fetchApi(path, getData) {
@@ -22,6 +23,8 @@ function fetchApi(path, getData) {
 fetchApi("../books.json", getData);
 
 function getData(data) {
+  books.innerHTML = "";
+
   data.forEach((bookData) => {
     const book = document.createElement("div");
     book.classList.add("book");
@@ -52,6 +55,7 @@ function getData(data) {
   // Call addBook after all books are rendered
   addBook();
   showMore(data);
+  searchBooks(data);
 }
 
 function addBook() {
@@ -272,5 +276,56 @@ function closeModal(modal) {
       document.body.style.top = "";
       window.scrollTo(0, scrollPosition);
     }, 200);
+  });
+}
+
+// search books
+function searchBooks(data) {
+  const form = document.querySelector("#search-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  form.addEventListener("input", (e) => {
+    inputValue = e.target.value.toLowerCase();
+    inputValue = inputValue.trim();
+
+    if (inputValue) {
+      books.innerHTML = "";
+
+      const filteredData = data.filter((bookData) => {
+        return bookData.title.toLowerCase().includes(inputValue);
+      });
+      console.log(filteredData);
+
+      filteredData.forEach((book) => {
+        const newBook = document.createElement("div");
+        newBook.classList.add("book");
+        newBook.innerHTML = `
+        <div class="book-img">
+        <img src="${book.imageLink}" alt="book image" />
+        </div>
+        <div class="book-info">
+        <h4 class="book-title">${book.title}</h4>
+        <p class="book-author">${book.author}</p>
+        <div class="book-rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        </div>
+        <div class="book-price"><p>Price:</p> <h3>$${book.price}</h3></div>
+        <div class="book-buttons">
+        <button class="btn add-to-bag">Add to bag</button>
+        <button class="outline show-more">Show more</button>
+        </div>
+        </div>
+        `;
+        books.appendChild(newBook);
+      });
+    } else {
+      getData(data);
+    }
   });
 }
