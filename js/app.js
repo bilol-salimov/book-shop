@@ -332,7 +332,7 @@ function searchBooks(data) {
 }
 
 confirmBtn.addEventListener("click", () => {
-  if (bagBooks.hasChildNodes(".book")) {
+  if (total !== 0) {
     window.location.pathname = "pages/confirm-order/index.html";
   }
 });
