@@ -348,6 +348,10 @@ main .container {
   align-items: center;
 }
 
+.confirm-order .btn {
+  margin-bottom: 50px;
+}
+
 .total-text {
   font-size: 2.2rem;
 }
