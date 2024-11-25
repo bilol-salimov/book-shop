@@ -79,6 +79,11 @@ button:hover {
   transform: scale(1.05);
 }
 
+label {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
 input {
   outline: none;
   border: none;

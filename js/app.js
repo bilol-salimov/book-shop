@@ -2,6 +2,7 @@
 const books = document.querySelector(".books");
 const bagBooks = document.querySelector(".your-bag .books");
 const totalPrice = document.querySelector(".total-price .price");
+const confirmBtn = document.querySelector(".book-buttons .btn");
 let slideIndex = 0;
 let numbers = [];
 let total = 0;
@@ -329,3 +330,9 @@ function searchBooks(data) {
     }
   });
 }
+
+confirmBtn.addEventListener("click", () => {
+  if (bagBooks.hasChildNodes(".book")) {
+    window.location.pathname = "pages/confirm-order/index.html";
+  }
+});
