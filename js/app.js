@@ -45,8 +45,8 @@ function getData(data) {
     </div>
     <div class="book-price"><p>Price:</p> <h3>$${bookData.price}</h3></div>
     <div class="book-buttons">
-    <button class="btn add-to-bag">Add to bag</button>
-    <button class="outline show-more">Show more</button>
+    <button class="btn add-to-bag btn-fill active">Add to bag</button>
+    <button class="btn btn-outline active show-more">Show more</button>
     </div>
     </div>
     `;
@@ -86,7 +86,7 @@ function addBook() {
       const newBook = document.createElement("div");
       newBook.classList.add("book");
       newBook.innerHTML = `       
-      <button class="close-btn"><i class="fas fa-close"></i></button>
+      <button class="close-btn btn active"><i class="fas fa-close"></i></button>
       <div class="book-img">
       <img src="${imgSrc}" alt="book image" />
       </div>
@@ -98,9 +98,9 @@ function addBook() {
       <h3 class="price">$${price}</h3>
       </div>
       <div class="book-order">
-      <button class="minus-btn"><i class="fas fa-minus"></i></button>
+      <button class="minus-btn btn btn-rounded btn-fill"><i class="fas fa-minus"></i></button>
       <p class="order-number">0</p>
-      <button class="plus-btn"><i class="fas fa-plus"></i></button>
+      <button class="plus-btn btn btn-rounded btn-fill active"><i class="fas fa-plus"></i></button>
       </div>
       </div>
       `;
@@ -211,7 +211,8 @@ function orderNumber() {
     price = parseFloat(price.replace("$", ""));
 
     plusBtn.onclick = () => {
-      minusBtn.style.backgroundColor = "#ffb800";
+      minusBtn.classList.add("active");
+      confirmBtn.classList.add("active");
       numbers[index]++;
       orderNumber.innerText = numbers[index];
       total += price;
@@ -226,7 +227,8 @@ function orderNumber() {
         totalPrice.innerText = total;
       }
       if (numbers[index] === 0) {
-        minusBtn.style.backgroundColor = "#dddddd";
+        minusBtn.classList.remove("active");
+        confirmBtn.classList.remove("active");
       }
     };
   });

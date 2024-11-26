@@ -55,27 +55,42 @@ img {
   object-position: center;
 }
 
-button {
+.btn {
   font-size: 1.8rem;
   font-weight: 400;
   color: #fff;
-  background-color: #ffb800;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
+  cursor: default;
   border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.2s linear;
 }
 
-button.outline {
+.btn-outline {
+  cursor: pointer;
   background-color: transparent;
   color: #000;
 }
 
-button:hover {
+.btn-fill {
+  background-color: #dddddd;
+}
+
+.btn-rounded {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.btn.active {
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+
+.btn-fill.active {
+  background-color: #ffb800;
+}
+
+.btn.active:hover {
   transform: scale(1.05);
 }
 
@@ -147,6 +162,8 @@ header .title {
   left: 10px;
   font-size: 14px;
   pointer-events: none;
+  width: 35px;
+  height: 35px;
 }
 
 /* main */
@@ -295,12 +312,7 @@ main .container {
   top: -10px;
   width: 30px;
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: red;
-  font-size: 20px;
-  font-weight: normal;
 }
 
 .your-bag .book-title {
@@ -326,16 +338,6 @@ main .container {
 .book-order button {
   width: 30px;
   height: 30px;
-  font-size: 18px;
-  font-weight: 900;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.book-order button:first-child {
-  background-color: #dddddd;
 }
 
 .order-number {
