@@ -340,8 +340,8 @@ function searchBooks(data) {
         </div>
         <div class="book-price"><p>Price:</p> <h3>$${book.price}</h3></div>
         <div class="book-buttons">
-        <button class="btn add-to-bag">Add to bag</button>
-        <button class="outline show-more">Show more</button>
+        <button class="btn btn-fill active add-to-bag">Add to bag</button>
+        <button class="btn btn-outline show-more">Show more</button>
         </div>
         </div>
         `;
