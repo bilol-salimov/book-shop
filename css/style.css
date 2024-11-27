@@ -223,6 +223,10 @@ main .container {
   cursor: pointer;
 }
 
+.fa-star.active {
+  color: #ffb800;
+}
+
 .book-price {
   display: flex;
   align-items: center;

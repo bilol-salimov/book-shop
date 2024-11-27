@@ -51,12 +51,31 @@ function getData(data) {
     </div>
     `;
     books.appendChild(book);
+
+    const stars = book.querySelectorAll(".fa-star");
+    starsActive(stars);
   });
 
   // Call addBook after all books are rendered
   addBook();
   showMore(data);
   searchBooks(data);
+}
+
+// add book rating
+function starsActive(stars) {
+  stars.forEach((star, index) => {
+    star.addEventListener("click", (e) => {
+      const book = e.target.closest(".book");
+      const bookStars = book.querySelectorAll(".fa-star");
+
+      bookStars.forEach((bookStar) => bookStar.classList.remove("active"));
+
+      for (let i = 0; i <= index; i++) {
+        bookStars[i].classList.add("active");
+      }
+    });
+  });
 }
 
 function addBook() {
