@@ -12,12 +12,17 @@ h2.title {
 }
 
 .form-wrapper {
-  width: 600px;
+  min-width: 50%;
   background-color: #fff;
   box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   padding: 5rem;
   position: relative;
+}
+
+.form-wrapper .title {
+  padding-top: 0;
+  padding-bottom: 40px;
 }
 
 .form-group {
@@ -135,4 +140,30 @@ form button {
   margin-right: auto;
   padding: 12px 36px;
   margin-top: 40px;
+}
+
+/* User info */
+.user-info div {
+  display: flex;
+  margin-bottom: 18px;
+}
+
+.user-info span {
+  flex: 1;
+  text-align: end;
+  margin-right: 20px;
+  font-size: 2.4rem;
+  color: #ffb800;
+}
+
+.user-info h4 {
+  flex: 2;
+}
+
+.user-info button {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  padding: 12px 36px;
 }

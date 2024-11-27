@@ -1,4 +1,6 @@
 // Selectors
+const formWrapper = document.querySelector(".form-wrapper");
+const form = document.querySelector("form");
 const inputDate = document.querySelector("#date");
 const radios = document.querySelectorAll("input[type='radio']");
 const radioCash = document.querySelector(".cash");
@@ -31,7 +33,56 @@ radioCard.addEventListener("click", (e) => {
 completeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.classList.contains("active")) {
+    const name = document.querySelector("#name").value;
+    const lastName = document.querySelector("#lastName").value;
+    const date = document.querySelector("#date").value;
+    const street = document.querySelector("#street").value;
+    const houseNumber = document.querySelector("#houseNumber").value;
+    const flat = document.querySelector("#flat").value;
+    const cash = document.querySelector("#cash");
+    const card = document.querySelector("#card");
+    const gift1 = document.querySelector("#gift1").value;
+    const gift2 = document.querySelector("#gift2").value;
+    const newElement = document.createElement("div");
+
+    let payment = "";
+    if (cash.checked) {
+      payment = "Cash";
+    }
+    if (card.checked) {
+      payment = "Card";
+    }
+
+    let gifts = "";
+    if (gift1 === "none" && gift2 === "none") {
+      gifts = "No gifts";
+    }
+    if (gift1 === "none" && gift2 !== "none") {
+      gifts = gift2;
+    }
+    if (gift2 === "none" && gift1 !== "none") {
+      gifts = gift1;
+    }
+
+    newElement.innerHTML = `
+        <h3 class="title">Congratulations! Order has been completed</h3>
+  
+        <div class="user-info">
+          <div><span>Customer</span><h4>${name + " " + lastName}</h4></div>
+          <div><span>Delivery address</span><h4>${
+            street + ", house " + houseNumber + ", flat " + flat
+          }</h4></div>
+          <div><span>Delivery date</span><h4>${date}</h4></div>
+          <div><span>Payment</span><h4>${payment}</h4></div>
+          <div><span>Gifts</span><h4>${gifts}</h4></div>
+          <button class="btn btn-fill active">Back to Shop</button>
+        </div>
+    `;
+    formWrapper.replaceChild(newElement, form);
   }
+
+  const backShopBtn = document.querySelector(".user-info .btn");
+  backShopBtn.addEventListener("click", backToShop);
 });
 
 // Get date
@@ -66,13 +117,16 @@ function checkFormComplete() {
 
   if (allFilled) {
     completeBtn.classList.add("active");
-    console.log("value bor");
   } else {
     completeBtn.classList.remove("active");
-    console.log("value bo'sh");
   }
 }
 
 formInputs.forEach((input) => {
   input.addEventListener("input", checkFormComplete);
 });
+
+// Back to shop
+function backToShop() {
+  window.location.pathname = "index.html";
+}
