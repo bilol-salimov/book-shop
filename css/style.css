@@ -290,11 +290,11 @@ main .container {
 }
 
 .slider:nth-child(3) {
-  left: -10px;
+  left: 5px;
 }
 
 .slider:nth-child(4) {
-  right: -10px;
+  right: 5px;
 }
 
 .slider.active {

@@ -152,6 +152,7 @@ function cancelBook(newBook, price) {
       sliders.forEach((slider) => {
         slider.classList.remove("active");
       });
+      confirmBtn.classList.remove("active");
       console.log("Removed active class from sliders");
     }
     slider();
