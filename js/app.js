@@ -118,7 +118,7 @@ function addBook() {
       </div>
       <div class="book-order">
       <button class="minus-btn btn btn-rounded btn-fill"><i class="fas fa-minus"></i></button>
-      <p class="order-number">0</p>
+      <p class="order-number">1</p>
       <button class="plus-btn btn btn-rounded btn-fill active"><i class="fas fa-plus"></i></button>
       </div>
       </div>
@@ -126,6 +126,26 @@ function addBook() {
 
       // const booksInBag = bagBooks.querySelectorAll(".book");
       bagBooks.appendChild(newBook);
+
+      // Update book order number and total price
+      const booksInBag = bagBooks.querySelectorAll(".book");
+      const index = Array.from(booksInBag).indexOf(newBook);
+
+      if (numbers[index] === undefined) {
+        numbers[index] = 1;
+      }
+
+      total += price;
+      totalPrice.innerText = total;
+
+      const minusBtn = newBook.querySelector(".minus-btn");
+      const orderNr = newBook.querySelector(".order-number");
+      // let price = book.querySelector(".price").innerText;
+      // price = parseFloat(price.replace("$", ""));
+
+      minusBtn.classList.add("active");
+      confirmBtn.classList.add("active");
+      orderNr.innerText = numbers[index];
 
       slider(); //for sliders
       cancelBook(newBook, price); //for remove book
@@ -150,11 +170,11 @@ function cancelBook(newBook, price) {
     bagBooks.removeChild(newBook);
     // console.log(total);
 
-    numbers[index] = 0;
+    numbers[index] = undefined;
 
     // Refresh slides
     let booksInBag = bagBooks.querySelectorAll(".book");
-    console.log(booksInBag.length);
+    // console.log(booksInBag.length);
     if (slideIndex === 0) {
       slideIndex = 0;
       bagBooks.style.transform = `translateX(-${slideIndex}00%)`;
@@ -220,10 +240,6 @@ function orderNumber() {
   const booksInBag = bagBooks.querySelectorAll(".book");
 
   booksInBag.forEach((book, index) => {
-    if (numbers[index] === undefined) {
-      numbers[index] = 0;
-    }
-
     const plusBtn = book.querySelector(".plus-btn");
     const minusBtn = book.querySelector(".minus-btn");
     const orderNumber = book.querySelector(".order-number");
@@ -319,7 +335,6 @@ function searchBooks(data) {
       const filteredData = data.filter((bookData) => {
         return bookData.title.toLowerCase().includes(inputValue);
       });
-      console.log(filteredData);
 
       filteredData.forEach((book) => {
         const newBook = document.createElement("div");
@@ -347,6 +362,16 @@ function searchBooks(data) {
         `;
         books.appendChild(newBook);
       });
+
+      // Add star active
+      const searchBooks = document.querySelectorAll(".book");
+      searchBooks.forEach((book) => {
+        const stars = book.querySelectorAll(".fa-star");
+        starsActive(stars);
+      });
+
+      addBook();
+      showMore(data);
     } else {
       getData(data);
     }
