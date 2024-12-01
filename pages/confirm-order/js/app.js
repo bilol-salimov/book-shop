@@ -44,6 +44,8 @@ completeBtn.addEventListener("click", (e) => {
     const gift1 = document.querySelector("#gift1").value;
     const gift2 = document.querySelector("#gift2").value;
     const newElement = document.createElement("div");
+    // console.log(gift1);
+    // console.log(gift2);
 
     let payment = "";
     if (cash.checked) {
@@ -56,12 +58,12 @@ completeBtn.addEventListener("click", (e) => {
     let gifts = "";
     if (gift1 === "none" && gift2 === "none") {
       gifts = "No gifts";
-    }
-    if (gift1 === "none" && gift2 !== "none") {
+    } else if (gift1 === "none" && gift2 !== "none") {
       gifts = gift2;
-    }
-    if (gift2 === "none" && gift1 !== "none") {
+    } else if (gift2 === "none" && gift1 !== "none") {
       gifts = gift1;
+    } else {
+      gifts = `${gift1}, ${gift2}`;
     }
 
     newElement.innerHTML = `

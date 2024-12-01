@@ -183,8 +183,6 @@ function cancelBook(newBook, price) {
       bagBooks.style.transform = `translateX(-${slideIndex}00%)`;
     }
 
-    console.log("Canceled Order book");
-
     // Check if the bag is empty
     if (bagBooks.querySelectorAll(".book").length === 0) {
       const sliders = document.querySelectorAll(".slider");
@@ -192,7 +190,6 @@ function cancelBook(newBook, price) {
         slider.classList.remove("active");
       });
       confirmBtn.classList.remove("active");
-      console.log("Removed active class from sliders");
     }
     slider();
   });
@@ -205,12 +202,10 @@ function slider() {
   // If don't more than 1 book, turn off slider
   if (booksInBag.length > 1) {
     sliders.forEach((slider) => slider.classList.add("active"));
-    // console.log(booksInBag.length);
   } else {
     sliders.forEach((slider) => slider.classList.remove("active"));
     slideIndex = 0;
     bagBooks.style.transform = "translateX(0)";
-    // console.log(booksInBag.length);
     return;
   }
 
